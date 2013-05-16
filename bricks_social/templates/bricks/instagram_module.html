@@ -1,0 +1,38 @@
+{% extends "module.html" %}
+
+{% load begood_tags begood_util_tags bricks i18n %}
+
+{% block module_id %}today{% endblock %}
+
+{% block module_top %}
+  {% brick_edit brick %}
+{% endblock %}
+
+{% block module_title %}
+  <a href="/">Instagram</a>
+  <span class="subtitle">#hagelby</span>
+{% endblock %}
+
+{% block module %}
+  <script>
+    var feed = new Instafeed({
+      'clientId': '{{ client_id }}',
+      'get': '{{ filter_by }}',
+      {% if filter_by == "user" %}
+      'userId': '{{ user_id }}',
+      {% endif %}
+      {% if filter_by == "tagged" %}
+      'tagName': '{{ tag_name }}',
+      {% endif %}
+      {% if filter_by == "location" %}
+      'locationId': '{{ location_id }}',
+      {% endif %}
+      'sortBy': '{{ order_by }}',
+      'links': {% if links %}true{% else %}false{% endif %},
+      'limit': {{ limit }}
+    });
+    feed.run();
+  </script>
+  
+  <div id="instafeed"></div>
+{% endblock %}
