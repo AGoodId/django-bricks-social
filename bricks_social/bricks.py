@@ -6,14 +6,19 @@ from begood.bricks.models import Brick
 from begood.bricks.fields import BrickField, BooleanField
 
 
-FILTER_CHOICES = (
+FB_COLOR_SCHEME_CHOICES = (
+  ('light', 'light'),
+  ('dark', 'dark'),
+)
+
+INSTAGRAM_FILTER_CHOICES = (
   ('popular', 'popular'),
   ('user', 'user ID'),
   ('tagged', 'tag name'),
   ('location', 'location ID'),
 )
 
-SORT_ORDER_CHOICES = (
+INSTAGRAM_SORT_ORDER_CHOICES = (
   ('most-recent', 'most-recent'),
   ('least-recent', 'least-recent'),
   ('most-liked', 'most-liked'),
@@ -24,14 +29,34 @@ SORT_ORDER_CHOICES = (
 )
 
 
+class FBLikeBoxBrick(Brick):
+  """A brick that renders an Instagram feed"""
+
+  template = 'bricks/fb_like_box.html'
+
+  page_url = BrickField(_('Facebook Page URL'), blank=False)
+  width = BrickField(_('limit'), formfield=forms.IntegerField(), default=300)
+  height = BrickField(_('limit'), formfield=forms.IntegerField(), blank=True)
+  show_faces = BooleanField(_('show faces'), default=True)
+  show_header = BooleanField(_('show header'), default=False)
+  show_stream = BooleanField(_('show stream'), default=False)
+  show_border = BooleanField(_('show border'), default=False)
+  color_scheme = BrickField(_('color scheme'), formfield=forms.ChoiceField(choices=FB_COLOR_SCHEME_CHOICES), default="light")
+  css_class = BrickField(_('CSS class'), blank=True)
+
+  class Meta:
+    proxy = True
+    verbose_name = _('Facebook Like Box')
+
+
 class InstagramModuleBrick(Brick):
   """A brick that renders an Instagram feed"""
 
   template = 'bricks/instagram_module.html'
 
   client_id = BrickField(_('user ID'), blank=False)
-  order_by = BrickField(_('order by'), formfield=forms.ChoiceField(choices=SORT_ORDER_CHOICES), default="most-recent")
-  filter_by = BrickField(_('filter by'), formfield=forms.ChoiceField(choices=FILTER_CHOICES), default="popular")
+  order_by = BrickField(_('order by'), formfield=forms.ChoiceField(choices=INSTAGRAM_SORT_ORDER_CHOICES), default="most-recent")
+  filter_by = BrickField(_('filter by'), formfield=forms.ChoiceField(choices=INSTAGRAM_FILTER_CHOICES), default="popular")
   user_id = BrickField(_('user ID'), blank=True)
   location_id = BrickField(_('location'), blank=True)
   tag_name = BrickField(_('tag name'), blank=True)

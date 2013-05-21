@@ -1,0 +1,14 @@
+{% load bricks %}
+
+{% brick_edit brick %}
+
+<div class="fb-like-box {{ css_class }}"
+  data-href="{{ page_url }}"
+  data-width="{{ width }}"
+  {% if height %}data-height="{{ height }}"{% endif %}
+  data-show-faces="{{ show_faces }}"
+  data-stream="{{ show_stream }}"
+  data-show-border="{{ show_border }}"
+  data-header="{{ show_header }}"
+  data-colorscheme="{{ color_scheme }}">
+</div>
