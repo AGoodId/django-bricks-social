@@ -26,7 +26,13 @@
       {% endif %}
       'sortBy': '{{ order_by }}',
       'links': {% if links %}true{% else %}false{% endif %},
-      'limit': {{ limit }}
+      'limit': 60,
+      'after': function() {
+        {% if limit %}
+        $('#instafeed').children().slice({{ limit }}).remove();
+        {% endif %}
+        return;
+      }
     });
     feed.run();
   </script>
