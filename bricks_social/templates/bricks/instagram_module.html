@@ -4,6 +4,8 @@
 
 {% block module_id %}instagram{% endblock %}
 
+{% block module_class %}{{ css_class }}{% endblock %}
+
 {% block module_top %}
   {% brick_edit brick %}
 {% endblock %}
@@ -11,7 +13,6 @@
 {% block module_title %}{% endblock %}
 
 {% block module %}
-<div class="{{ css_class }}">
   <script>
     var feed = new Instafeed({
       'clientId': '{{ client_id }}',
@@ -39,5 +40,4 @@
   </script>
   
   <div id="instafeed"></div>
-</div>
 {% endblock %}
