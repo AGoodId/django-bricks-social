@@ -3,5 +3,5 @@
 {% brick_edit brick %}
 
 <div{% if css_class %} class="{{ css_class }}"{% endif %}>
-  {{ embed_code }}
+  {{ embed_code|safe }}
 </div>
