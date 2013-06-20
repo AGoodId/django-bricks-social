@@ -67,3 +67,12 @@ class InstagramModuleBrick(Brick):
   class Meta:
     proxy = True
     verbose_name = _('Instagram Module')
+
+
+class TwitterWidgetBrick(Brick):
+  """A brick that renders a Twitter Widget"""
+
+  template = 'bricks/twitter_widget.html'
+
+  embed_code = BrickField(_('embed code'), formfield=forms.CharField(widget=forms.Textarea(attrs={'rows': 25})))
+  css_class = BrickField(_('CSS class'), blank=True)  
