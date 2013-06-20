@@ -75,4 +75,4 @@ class TwitterWidgetBrick(Brick):
   template = 'bricks/twitter_widget.html'
 
   embed_code = BrickField(_('embed code'), formfield=forms.CharField(widget=forms.Textarea(attrs={'rows': 25})))
-  css_class = BrickField(_('CSS class'), blank=True)  
+  css_class = BrickField(_('CSS class'), blank=True)
